@@ -257,6 +257,4 @@ const typing=setInterval(()=>{
 },60);
 
 }
-document.addEventListener("click", () => {
-    document.getElementById("bgMusic").play();
-}, { once: true });
+
