@@ -1,0 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100vh;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#FFF8E7;
+    padding:20px;
+    overflow-y:auto;
+    font-family:Arial, sans-serif;
+}
+
+/* Main Card */
+.container{
+    width:100%;
+    max-width:380px;
+    background:#fff9ec;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* Heading */
+h1{
+    font-size:1.8rem;
+    margin-bottom:15px;
+}
+
+/* Sanskrit Shlok */
+h4{
+    font-size:1.1rem;
+    font-weight:bold;
+    line-height:1.5;
+    margin:15px 0;
+}
+
+/* Guru Photo */
+.photo-frame{
+    width:220px;
+    height:280px;
+    margin:15px auto;
+    border:4px solid #d4af37;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Message */
+.message{
+    font-size:1rem;
+    line-height:1.7;
+    margin-top:15px;
+}
+
+/* Footer */
+.footer{
+    font-size:1.1rem;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (min-width:768px){
+
+.container{
+    max-width:600px;
+    padding:30px;
+}
+
+.photo-frame{
+    width:280px;
+    height:350px;
+}
+
+h1{
+    font-size:2.4rem;
+}
+
+h4{
+    font-size:1.4rem;
+}
+
+.message{
+    font-size:1.2rem;
+}
+
+.footer{
+    font-size:1.3rem;
+}
+
+}
+
+/* ---------- Laptop/Desktop ---------- */
+
+@media (min-width:1024px){
+
+.container{
+    max-width:750px;
+    padding:40px;
+}
+
+.photo-frame{
+    width:320px;
+    height:400px;
+}
+
+h1{
+    font-size:3rem;
+}
+
+h4{
+    font-size:1.6rem;
+}
+
+.message{
+    font-size:1.3rem;
+}
+
+.footer{
+    font-size:1.5rem;
+}
+
+}
+
+.footer{
+    white-space: nowrap;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h4{
+    white-space: nowrap;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
