@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Sorry ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff1f5, #ffe4ec, #fff7f9);
+            color: #4a2632;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 25px;
+            opacity: 0.5;
+            animation: floatHeart linear infinite;
+        }
+
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-duration: 9s;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            left: 25%;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(3) {
+            left: 45%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        .heart:nth-child(4) {
+            left: 65%;
+            animation-duration: 14s;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(5) {
+            left: 82%;
+            animation-duration: 11s;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .website {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page {
+            width: min(900px, 95%);
+            min-height: 620px;
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(150, 70, 100, 0.2);
+            padding: 50px;
+            text-align: center;
+
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+
+            animation: pageEnter 0.7s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes pageEnter {
+
+            from {
+                opacity: 0;
+                transform: translateX(60px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+        }
+
+        /* =========================
+           PAGE NUMBER
+        ========================== */
+
+        .page-number {
+            font-size: 14px;
+            color: #b45b78;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           PAGE 1 - UPLOADED CARD IMAGE
+        ========================== */
+
+        .page:first-of-type {
+            background: transparent;
+            box-shadow: none;
+            padding: 10px;
+            overflow: visible;
+        }
+
+        .uploaded-card {
+            display: block;
+            width: min(760px, 94vw);
+            max-width: 100%;
+            height: auto;
+            max-height: 76vh;
+            object-fit: contain;
+            margin: auto;
+            border-radius: 4px;
+            box-shadow: 0 18px 45px rgba(60, 40, 25, 0.25);
+            animation: cardAppear 0.9s ease both;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .next-overlay {
+            position: relative;
+            z-index: 10;
+            margin-top: 18px;
+        }
+
+        /* =========================
+           OTHER PAGES
+        ========================== */
+
+        .page-title {
+            font-size: 36px;
+            color: #b83b63;
+            margin-bottom: 30px;
+        }
+
+        .paragraph-container {
+            max-width: 720px;
+            margin: auto;
+            background: #fff8fa;
+            border-left: 5px solid #d96b8c;
+            border-radius: 15px;
+            padding: 35px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(150, 70, 100, 0.08);
+        }
+
+        .paragraph-container p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #51323d;
+        }
+
+        .placeholder {
+            color: #a86a7d;
+            font-style: italic;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: 600;
+        }
+
+        .next-btn {
+            background: #c94f73;
+            color: white;
+            box-shadow: 0 8px 20px rgba(201, 79, 115, 0.3);
+        }
+
+        .next-btn:hover {
+            background: #a93c5d;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(201, 79, 115, 0.4);
+        }
+
+        .prev-btn {
+            background: #f5d7e1;
+            color: #8f3f5b;
+        }
+
+        .prev-btn:hover {
+            background: #edc1cf;
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           FINAL PAGE
+        ========================== */
+
+        .final-message {
+            font-size: 24px;
+            line-height: 1.8;
+            color: #71384b;
+        }
+
+        .final-heart {
+            font-size: 60px;
+            margin: 25px;
+            animation: heartbeat 2s infinite;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            .website {
+                min-height: 100svh;
+                height: auto;
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .page {
+                width: 100%;
+                min-height: calc(100svh - 24px);
+                padding: 12px 8px 18px;
+                border-radius: 18px;
+            }
+
+            .page:first-of-type {
+                min-height: calc(100svh - 24px);
+                justify-content: center;
+                padding: 8px;
+            }
+
+            .uploaded-card {
+                width: 100%;
+                max-width: 100%;
+                max-height: none;
+                border-radius: 3px;
+            }
+
+            .next-overlay {
+                margin-top: 16px;
+            }
+
+            .page-title {
+                font-size: 27px;
+                margin-bottom: 22px;
+            }
+
+            .page-number {
+                font-size: 12px;
+                letter-spacing: 1.5px;
+                margin-bottom: 12px;
+            }
+
+            .paragraph-container {
+                width: 100%;
+                padding: 22px 18px;
+                border-left-width: 4px;
+            }
+
+            .paragraph-container p {
+                font-size: 16px;
+                line-height: 1.75;
+            }
+
+            .buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 24px;
+            }
+
+            button {
+                min-width: 130px;
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+
+            .final-heart {
+                font-size: 48px;
+                margin: 18px;
+            }
+
+            .final-message {
+                font-size: 20px;
+            }
+
+            .heart {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .website {
+                padding: 7px;
+            }
+
+            .page {
+                min-height: calc(100svh - 14px);
+                padding: 10px 6px 15px;
+            }
+
+            .page:first-of-type {
+                min-height: calc(100svh - 14px);
+            }
+
+            .uploaded-card {
+                width: 100%;
+            }
+
+            .next-overlay {
+                margin-top: 12px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .paragraph-container {
+                padding: 18px 15px;
+            }
+
+            .paragraph-container p {
+                font-size: 15px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         FLOATING HEARTS
+    ========================== -->
+
+    <div class="background">
+
+        <div class="heart">❤️</div>
+        <div class="heart">💗</div>
+        <div class="heart">💕</div>
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+
+    </div>
+
+
+    <div class="website">
+
+
+        <!-- =========================
+             PAGE 1
+        ========================== -->
+
+        <section class="page active" id="page1">
+
+            <img src="sry.png"
+            >
+
+            <div class="buttons next-overlay">
+                <button class="next-btn" onclick="nextPage()">
+                    Next Page →
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PAGE 2
+        ========================== -->
+
+        <section class="page" id="page2">
+
+            <div>
+
+                <div class="page-number">
+                    PAGE 2 OF 5
+                </div>
+
+                <h2 class="page-title">
+                    What I Realized
+                </h2>
+
+                <div class="paragraph-container">
+
+                    <p class="placeholder">
+
+                       I’m truly sorry for what happened yesterday. When you were sharing your job preparation with me, I didn’t take you as seriously as I should have, and thatswhy you fell that you are losing confidence in you. The truth is, I never intended to hurt you or make you feel that way, but I also understand that my intention doesn’t change how my actions made you feel.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button class="prev-btn" onclick="prevPage()">
+                    ← Previous
+                </button>
+
+                <button class="next-btn" onclick="nextPage()">
+                    Next Page →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PAGE 3
+        ========================== -->
+
+        <section class="page" id="page3">
+
+            <div>
+
+                <div class="page-number">
+                    PAGE 3 OF 5
+                </div>
+
+                <h2 class="page-title">
+                    What You Mean To Me
+                </h2>
+
+                <div class="paragraph-container">
+
+                    <p class="placeholder">
+
+                        What hurts me the most is knowing that when I was going through my difficult times, you stood by me, supported me, and believed in me. And when you needed that same support from me, I unintentionally failed to give it to you. I genuinely feel sorry for that.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button class="prev-btn" onclick="prevPage()">
+                    ← Previous
+                </button>
+
+                <button class="next-btn" onclick="nextPage()">
+                    Next Page →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PAGE 4
+        ========================== -->
+
+        <section class="page" id="page4">
+
+            <div>
+
+                <div class="page-number">
+                    PAGE 4 OF 5
+                </div>
+
+                <h2 class="page-title">
+                    My Promise To You
+                </h2>
+
+                <div class="paragraph-container">
+
+                    <p class="placeholder">
+
+                        I want you to know that I believe in you, I believe in your abilities, and I believe in all the hard work you are putting into your future. I’m proud of you for trying, preparing, and continuing to move forward. From now on, I promise to listen to you properly, understand you, support you, and be there for you whenever you need me. I’ll make sure I never repeat this mistake again.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button class="prev-btn" onclick="prevPage()">
+                    ← Back
+                </button>
+
+                <button class="next-btn" onclick="nextPage()">
+                    Next Page →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PAGE 5
+        ========================== -->
+
+        <section class="page" id="page5">
+
+            <div>
+
+                <div class="page-number">
+                    PAGE 5 OF 5
+                </div>
+
+                <h2 class="page-title">
+                    One Last Thing...
+                </h2>
+
+                <div class="paragraph-container">
+
+                    <p class="placeholder">
+                    You are not just someone I call my best friend—you are someone whose presence and support mean a lot to me. I know one apology cannot erase what happened, but I hope my actions from now on can show you how much I value our friendship.
+                    <br><b>I believe in you, and I’ll always be here for you. </b>
+                    </p>
+
+                </div>
+
+                <div class="final-heart">
+                    ❤️
+                </div>
+
+                <div class="final-message">
+                    I’m really sorry Payal.
+                    
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button class="prev-btn" onclick="prevPage()">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        let currentPage = 1;
+
+        const totalPages = 5;
+
+
+        function showPage(pageNumber) {
+
+            document.querySelectorAll(".page").forEach(page => {
+
+                page.classList.remove("active");
+
+            });
+
+            document
+                .getElementById("page" + pageNumber)
+                .classList.add("active");
+
+        }
+
+
+        function nextPage() {
+
+            if (currentPage < totalPages) {
+
+                currentPage++;
+
+                showPage(currentPage);
+
+            }
+
+        }
+
+
+        function prevPage() {
+
+            if (currentPage > 1) {
+
+                currentPage--;
+
+                showPage(currentPage);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
