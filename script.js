@@ -1,262 +1,249 @@
-// ===============================
-// Smooth Scroll
-// ===============================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// ======================================
+// MOBILE NAVIGATION
+// ======================================
 
-    anchor.addEventListener("click", function(e){
+const menuButton = document.querySelector(".menu-toggle");
+const navigation = document.querySelector(".nav-links");
 
-        e.preventDefault();
+if (menuButton && navigation) {
 
-        const target=document.querySelector(this.getAttribute("href"));
+    menuButton.addEventListener("click", () => {
 
-        if(target){
+        const isOpen = navigation.classList.toggle("open");
 
-            target.scrollIntoView({
-
-                behavior:"smooth"
-
-            });
-
-        }
+        menuButton.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
 
     });
-
-});
-
-
-// ===============================
-// Scroll Reveal
-// ===============================
-
-const observer=new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity="1";
-
-            entry.target.style.transform="translateY(0)";
-
-        }
-
-    });
-
-},{threshold:0.2});
-
-document.querySelectorAll(".wish-card,.quote-card,.memory-container,.celebration-card").forEach(item=>{
-
-    item.style.opacity="0";
-
-    item.style.transform="translateY(60px)";
-
-    item.style.transition="1s";
-
-    observer.observe(item);
-
-});
-
-
-// ===============================
-// Hero Image Hover Animation
-// ===============================
-
-const image=document.querySelector(".image-card");
-
-if(image){
-
-image.addEventListener("mouseenter",()=>{
-
-    image.style.transform="scale(1.05) rotate(2deg)";
-
-});
-
-image.addEventListener("mouseleave",()=>{
-
-    image.style.transform="scale(1) rotate(0deg)";
-
-});
 
 }
 
 
-// ===============================
-// Floating Sparkles
-// ===============================
+// ======================================
+// BACKGROUND MUSIC
+// ======================================
 
-function createSparkle(){
+const music = document.getElementById("bgMusic");
+const musicButton = document.querySelector(".music-toggle");
 
-    const sparkle=document.createElement("div");
+if (music && musicButton) {
 
-    sparkle.innerHTML="✨";
+    musicButton.addEventListener("click", async () => {
 
-    sparkle.style.position="fixed";
+        try {
 
-    sparkle.style.left=Math.random()*window.innerWidth+"px";
+            if (music.paused) {
 
-    sparkle.style.top=window.innerHeight+"px";
+                await music.play();
 
-    sparkle.style.fontSize=(Math.random()*15+10)+"px";
+                musicButton.classList.add("is-playing");
 
-    sparkle.style.pointerEvents="none";
+                musicButton.querySelector(".music-label").textContent =
+                    "Pause music";
 
-    sparkle.style.zIndex="999";
+            } else {
 
-    document.body.appendChild(sparkle);
+                music.pause();
 
-    let pos=window.innerHeight;
+                musicButton.classList.remove("is-playing");
 
-    const timer=setInterval(()=>{
-
-        pos-=2;
-
-        sparkle.style.top=pos+"px";
-
-        sparkle.style.opacity=pos/window.innerHeight;
-
-        if(pos<0){
-
-            clearInterval(timer);
-
-            sparkle.remove();
-
-        }
-
-    },20);
-
-}
-
-setInterval(createSparkle,500);
-
-
-// ===============================
-// Button Click Animation
-// ===============================
-
-document.querySelectorAll("button").forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        btn.style.transform="scale(.9)";
-
-        setTimeout(()=>{
-
-            btn.style.transform="scale(1)";
-
-        },150);
-
-    });
-
-});
-
-
-
-
-
-// ===============================
-// Simple Confetti
-// ===============================
-
-function confetti(){
-
-    for(let i=0;i<120;i++){
-
-        const piece=document.createElement("div");
-
-        piece.style.position="fixed";
-
-        piece.style.width="8px";
-
-        piece.style.height="8px";
-
-        piece.style.background=
-        `hsl(${Math.random()*360},100%,60%)`;
-
-        piece.style.left=Math.random()*window.innerWidth+"px";
-
-        piece.style.top="-20px";
-
-        piece.style.borderRadius="50%";
-
-        piece.style.pointerEvents="none";
-
-        piece.style.zIndex="9999";
-
-        document.body.appendChild(piece);
-
-        let y=-20;
-
-        let x=parseFloat(piece.style.left);
-
-        let speed=Math.random()*4+2;
-
-        let rotate=Math.random()*360;
-
-        const fall=setInterval(()=>{
-
-            y+=speed;
-
-            x+=Math.random()*2-1;
-
-            rotate+=5;
-
-            piece.style.top=y+"px";
-
-            piece.style.left=x+"px";
-
-            piece.style.transform=`rotate(${rotate}deg)`;
-
-            if(y>window.innerHeight){
-
-                clearInterval(fall);
-
-                piece.remove();
+                musicButton.querySelector(".music-label").textContent =
+                    "Play music";
 
             }
 
-        },15);
+        } catch (error) {
+
+            console.log("Music could not be played:", error);
+
+        }
+
+    });
+
+}
+
+
+// ======================================
+// IMAGE GALLERY LIGHTBOX
+// ======================================
+
+const lightbox = document.querySelector(".lightbox");
+
+if (lightbox) {
+
+    const lightboxImage = lightbox.querySelector("img");
+
+    const closeButton =
+        lightbox.querySelector(".lightbox-close");
+
+
+    document.querySelectorAll(".gallery-item").forEach(item => {
+
+        item.addEventListener("click", () => {
+
+            const image = item.querySelector("img");
+
+            lightboxImage.src =
+                item.dataset.full || image.src;
+
+            lightboxImage.alt = image.alt;
+
+            lightbox.classList.add("open");
+
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
+
+
+    function closeLightbox() {
+
+        lightbox.classList.remove("open");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    closeButton.addEventListener("click", closeLightbox);
+
+
+    lightbox.addEventListener("click", event => {
+
+        if (event.target === lightbox) {
+
+            closeLightbox();
+
+        }
+
+    });
+
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+
+            closeLightbox();
+
+        }
+
+    });
+
+}
+
+
+// ======================================
+// BIRTHDAY GIFT REVEAL
+// ======================================
+
+const surpriseStage =
+    document.querySelector(".surprise-stage");
+
+
+if (surpriseStage) {
+
+    const giftButton =
+        surpriseStage.querySelector(".gift-button");
+
+    const celebrateButton =
+        surpriseStage.querySelector(".celebrate-btn");
+
+
+    giftButton.addEventListener("click", () => {
+
+        surpriseStage.classList.add("opened");
+
+        launchConfetti(150);
+
+    });
+
+
+    celebrateButton.addEventListener("click", () => {
+
+        launchConfetti(110);
+
+    });
+
+}
+
+
+// ======================================
+// CONFETTI ANIMATION
+// ======================================
+
+function launchConfetti(amount = 100) {
+
+    const layer =
+        document.querySelector(".confetti-layer") ||
+        createConfettiLayer();
+
+    const colors = [
+        "#f3cc91",
+        "#ed9bb8",
+        "#b89be7",
+        "#fff2df",
+        "#d987a8"
+    ];
+
+
+    for (let i = 0; i < amount; i++) {
+
+        const piece = document.createElement("span");
+
+        piece.className = "confetti-piece";
+
+        piece.style.left =
+            Math.random() * 100 + "%";
+
+        piece.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        piece.style.animationDelay =
+            Math.random() * 0.8 + "s";
+
+        piece.style.animationDuration =
+            2.2 + Math.random() * 1.8 + "s";
+
+        piece.style.setProperty(
+            "--drift",
+            (Math.random() * 220 - 110) + "px"
+        );
+
+        piece.style.borderRadius =
+            Math.random() > 0.5 ? "50%" : "2px";
+
+        layer.appendChild(piece);
+
+
+        piece.addEventListener("animationend", () => {
+
+            piece.remove();
+
+        });
 
     }
 
 }
 
-window.onload=()=>{
 
-    confetti();
+// ======================================
+// CREATE CONFETTI CONTAINER
+// ======================================
 
-};
+function createConfettiLayer() {
 
+    const layer = document.createElement("div");
 
-// ===============================
-// Typing Effect
-// ===============================
+    layer.className = "confetti-layer";
 
-const title=document.querySelector(".hero-content h1");
+    layer.setAttribute("aria-hidden", "true");
 
-if(title){
+    document.body.appendChild(layer);
 
-const text=title.innerHTML;
-
-title.innerHTML="";
-
-let i=0;
-
-const typing=setInterval(()=>{
-
-    title.innerHTML=text.substring(0,i);
-
-    i++;
-
-    if(i>text.length){
-
-        clearInterval(typing);
-
-    }
-
-},60);
+    return layer;
 
 }
-document.addEventListener("click", () => {
-    document.getElementById("bgMusic").play();
-}, { once: true });
